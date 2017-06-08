@@ -1,21 +1,7 @@
 <?php
 class UserModel extends Model
 {
-	public $userId;
-	/* Список пользователей */
-	public $list = [];
-	/* Текущий пользователь: ассоциативный массив 
-	*	с элементами role и name для существующего пользователя
-	*	или только с элементом name для неизвестного пользователя
-	*/
-	public $user = [];
-
-	// public function getList()
-	// {
-	// 	return unserialize(file_get_contents(USER_DB));
-	// }
-
-	public function create()
+	public function register()
 	{
 		try {
 			$first_name = $this->db->quote('Nikolaj');
@@ -23,43 +9,29 @@ class UserModel extends Model
 			$email = $this->db->quote('nikolaj.vasetsky@gmail.com');
 			$password = $this->db->quote(crypt('123456', SALT));
 
-			$start0 = microtime(true);
+			return $this->insert("
+				INSERT INTO users(first_name, last_name, email, password)
+				VALUES ($first_name, $last_name, $email, $password)
+			");
 
-						$user = $this->db->exec("
-							INSERT INTO users(first_name, last_name, email, password)
-							VALUES ($first_name, $last_name, $email, $password)
-						");
+		} catch(PDOException $e) {
+			exit($e->getMessage());
+		}
+	}
 
-						$this->userId = $this->db->lastInsertId();
+	public function login()
+	{
+		try {
+			$email = $this->db->quote('nikolaj.vasetsky@gmail.com');
+			$password = $this->db->quote(crypt('123456', SALT));
 
-			$time0 = microtime(true) - $start0;
-			printf('Скрипт выполнялся %.8F сек.', $time0);
-	// SELECT `email` FROM `tbl_name` WHERE `email` = ?
-$start = microtime(true);
-$query = $this->db->prepare("
-	INSERT INTO users(first_name, last_name, email, password)
-	VALUES (:first_name, :last_name, :email, :password)
-");
-// $query->bindValue( ':first_name', $first_name );
-// $query->bindValue( ':last_name', $last_name );
-// $query->bindValue( ':email', $email );
-// $query->bindValue( ':password', $password );
-
-$query->execute([
-	':first_name' => $first_name,
-	':last_name' => $last_name,
-	':email' => $email,
-	':password' => $password,
-]);
-
-$this->userId = $this->db->lastInsertId();
-			$time = microtime(true) - $start;
-			printf('Скрипт выполнялся %.8F сек.', $time);
-
-
-
-die;
-
+			return $this->selectOne("
+				SELECT count(*)
+				FROM users
+				WHERE email = $email
+				AND password = $password
+				LIMIT 1
+			");
 		} catch(PDOException $e) {
 			exit($e->getMessage());
 		}

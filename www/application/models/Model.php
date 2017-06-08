@@ -12,4 +12,32 @@ class Model
 			exit($e->getMessage());
 		}
 	}
+
+	public function insert($sql)
+	{
+		try {
+			$this->db->exec($sql);
+			return $this->db->lastInsertId();
+		} catch(PDOException $e) {
+			return $this->db->errorInfo();
+		}
+	}
+
+	public function select($sql)
+	{
+		try {
+			return $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+		} catch(PDOException $e) {
+			return $this->db->errorInfo();
+		}
+	}
+
+	public function selectOne($sql)
+	{
+		try {
+			return $this->db->query($sql)->fetchColumn();
+		} catch(PDOException $e) {
+			return $this->db->errorInfo();
+		}
+	}
 }
