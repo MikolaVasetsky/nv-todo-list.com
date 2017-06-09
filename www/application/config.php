@@ -15,7 +15,7 @@ const USER_DEFAULT_FILE = 'user_default.php';
 // const USER_ROLE_FILE = 'user_role.php';
 // const USER_LIST_FILE = 'user_list.php';
 // const USER_ADD_FILE = 'user_add.php';
-const USER_LOGIN_FILE = 'user_login.php';
+const USER_FILE = 'user.php';
 const USER_REGISTER_FILE = 'user_register.php';
 
 // database for users

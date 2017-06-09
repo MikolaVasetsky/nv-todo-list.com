@@ -9,7 +9,7 @@ class UserController extends Controller implements IController
 		// init model
 		$model = new UserModel();
 
-		$output = $model->render(USER_LOGIN_FILE);
+		$output = $this->render(USER_FILE);
 
 		$fc->setBody($output);
 
@@ -26,7 +26,7 @@ class UserController extends Controller implements IController
 			$_SESSION['logged_in'] = $result;
 			header('Location: '.HOME_URL);
 		} else {
-			$_SESSION['error'] = 'ERROR: Invalid email or password';
+			$_SESSION['error'] = 'Invalid email or password';
 			header('Location: '.HOME_URL.'/user/');
 		}
 	}

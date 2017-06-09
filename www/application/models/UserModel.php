@@ -22,8 +22,8 @@ class UserModel extends Model
 	public function login()
 	{
 		try {
-			$email = $this->db->quote('nikolaj.vasetsky@gmail.com');
-			$password = $this->db->quote(crypt('123456', SALT));
+			$email = $this->db->quote(trim($_POST['email']));
+			$password = $this->db->quote(crypt(trim($_POST['password']), SALT));
 
 			return $this->selectOne("
 				SELECT count(*)
@@ -35,13 +35,5 @@ class UserModel extends Model
 		} catch(PDOException $e) {
 			exit($e->getMessage());
 		}
-	}
-
-	public function render($file)
-	{
-		// current file
-		ob_start();
-		include($file);
-		return ob_get_clean();
 	}
 }
