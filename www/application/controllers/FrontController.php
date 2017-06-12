@@ -37,17 +37,13 @@ class FrontController
 			// get class information
 			$rc = new ReflectionClass($this->getController());
 
-			if ( $rc->implementsInterface('IController') ) {
-				if ( $rc->hasMethod($this->getAction()) ) {
-					$controller = $rc->newInstance();
-					$method = $rc->getMethod($this->getAction());
-					// perform method
-					$method->invoke($controller);
-				} else {
-					throw new Exception("Action");
-				}
+			if ( $rc->hasMethod($this->getAction()) ) {
+				$controller = $rc->newInstance();
+				$method = $rc->getMethod($this->getAction());
+				// perform method
+				$method->invoke($controller);
 			} else {
-				throw new Exception("Interface");
+				throw new Exception("Action");
 			}
 		} else {
 			throw new Exception("Controller");

@@ -8,13 +8,12 @@ error_reporting(E_ALL);
 set_include_path(get_include_path()
 					.PATH_SEPARATOR.'application/controllers'
 					.PATH_SEPARATOR.'application/models'
+					.PATH_SEPARATOR.'application/components'
 					.PATH_SEPARATOR.'application/views');
 
 // Files name: views
 const USER_DEFAULT_FILE = 'user_default.php';
-// const USER_ROLE_FILE = 'user_role.php';
-// const USER_LIST_FILE = 'user_list.php';
-// const USER_ADD_FILE = 'user_add.php';
+
 const USER_FILE = 'user.php';
 const USER_REGISTER_FILE = 'user_register.php';
 

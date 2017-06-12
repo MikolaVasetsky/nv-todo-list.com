@@ -1,5 +1,5 @@
 <?php
-class IndexController implements IController
+class IndexController
 {
 	public function indexAction()
 	{

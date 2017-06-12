@@ -1,39 +1,41 @@
 <?php
 class UserModel extends Model
 {
-	public function register()
+	public function register($userInfo)
 	{
-		try {
-			$first_name = $this->db->quote('Nikolaj');
-			$last_name = $this->db->quote('Vasetsky');
-			$email = $this->db->quote('nikolaj.vasetsky@gmail.com');
-			$password = $this->db->quote(crypt('123456', SALT));
-
-			return $this->insert("
-				INSERT INTO users(first_name, last_name, email, password)
-				VALUES ($first_name, $last_name, $email, $password)
-			");
-
-		} catch(PDOException $e) {
-			exit($e->getMessage());
-		}
+		return $this->db->insertUpdateDelete("
+			INSERT INTO users(first_name, last_name, email, password, session_id)
+			VALUES (".$userInfo['first_name'].", ".$userInfo['last_name'].", ".$userInfo['email'].", ".$userInfo['password'].", ".$userInfo['session_id'].")
+		");
 	}
 
-	public function login()
+	public function login($userInfo)
 	{
-		try {
-			$email = $this->db->quote(trim($_POST['email']));
-			$password = $this->db->quote(crypt(trim($_POST['password']), SALT));
+		return $this->db->selectOne("
+			SELECT id
+			FROM users
+			WHERE email = ".$userInfo['email']."
+			AND password = ".$userInfo['password']."
+			LIMIT 1
+		");
+	}
 
-			return $this->selectOne("
-				SELECT count(*)
-				FROM users
-				WHERE email = $email
-				AND password = $password
-				LIMIT 1
-			");
-		} catch(PDOException $e) {
-			exit($e->getMessage());
-		}
+	public function updateSessionId($userInfo)
+	{
+		return $this->db->insertUpdateDelete("
+			UPDATE users
+			SET session_id = ".$userInfo['session_id']."
+			WHERE email = ".$userInfo['email']."
+		");
+	}
+
+	public function isLogin()
+	{
+		return $this->db->selectOne("
+			SELECT count(*)
+			FROM users
+			WHERE session_id = ".$_SESSION['session_id']."
+			LIMIT 1
+		");
 	}
 }

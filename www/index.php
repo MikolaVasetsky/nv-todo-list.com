@@ -1,6 +1,6 @@
 <?php
-require_once('application/helpers.php');
-require_once('application/config.php');
+require_once('application/components/helpers.php');
+require_once('application/components/config.php');
 
 // autoloader class
 function __autoload($class){
