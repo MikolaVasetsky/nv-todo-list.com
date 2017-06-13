@@ -10,7 +10,7 @@ class IndexController
 
 		$model->name = "Guest";
 
-		$output = $model->render(USER_DEFAULT_FILE);
+		$output = $model->render(PAGE_HOME);
 
 		$fc->setBody($output);
 	}

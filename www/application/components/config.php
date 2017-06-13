@@ -3,16 +3,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
-// Default to search for files
-set_include_path(get_include_path()
-					.PATH_SEPARATOR.'application/controllers'
-					.PATH_SEPARATOR.'application/models'
-					.PATH_SEPARATOR.'application/components'
-					.PATH_SEPARATOR.'application/views');
-
 // Files name: views
-const USER_DEFAULT_FILE = 'user_default.php';
+const PAGE_HOME = 'home.php';
+
 const PAGE_404 = '404.php';
 
 const PAGE_USER = 'user.php';

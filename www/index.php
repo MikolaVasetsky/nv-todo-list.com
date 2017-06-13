@@ -1,6 +1,13 @@
 <?php
-require_once('application/components/helpers.php');
-require_once('application/components/config.php');
+// Default to search for files
+set_include_path(get_include_path()
+					.PATH_SEPARATOR.'application/controllers'
+					.PATH_SEPARATOR.'application/models'
+					.PATH_SEPARATOR.'application/components'
+					.PATH_SEPARATOR.'application/views');
+
+require_once('helpers.php');
+require_once('config.php');
 
 // autoloader class
 function __autoload($class){

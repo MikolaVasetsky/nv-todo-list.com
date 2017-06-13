@@ -33,10 +33,7 @@ class FrontController
 
 	public function route()
 	{
-		// need fix class exist
-		// vardump(class_exists($this->getController()));
-		// die;
-		if ( class_exists($this->getController()) ) {
+		if ( file_exists(dirname(__FILE__).'/'.$this->getController().'.php') && class_exists($this->getController()) ) {
 			// get class information
 			$rc = new ReflectionClass($this->getController());
 
