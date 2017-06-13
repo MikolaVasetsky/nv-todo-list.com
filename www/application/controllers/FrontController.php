@@ -33,6 +33,9 @@ class FrontController
 
 	public function route()
 	{
+		// need fix class exist
+		// vardump(class_exists($this->getController()));
+		// die;
 		if ( class_exists($this->getController()) ) {
 			// get class information
 			$rc = new ReflectionClass($this->getController());
@@ -43,10 +46,12 @@ class FrontController
 				// perform method
 				$method->invoke($controller);
 			} else {
-				throw new Exception("Action");
+				self::ErrorPage();
+				// throw new Exception("Action");
 			}
 		} else {
-			throw new Exception("Controller");
+			self::ErrorPage();
+			// throw new Exception("Controller");
 		}
 	}
 
@@ -70,7 +75,16 @@ class FrontController
 		return $this->_body;
 	}
 
-	public function setBody($body) {
+	public function setBody($body)
+	{
 		$this->_body = $body;
+	}
+
+	public static function ErrorPage()
+	{
+		//need html
+	    header("HTTP/1.0 404 Not Found");
+	    include(PAGE_404);
+        return;
 	}
 }

@@ -28,7 +28,7 @@ class Controller
 				}
 				if ( $key_param == 'required' ) {
 					if ( !empty($request[$key_request]) !== $param ) {
-						$errors[] = 'Fiend ' .$key_request. ' is required';
+						$errors[] = 'Field ' .$key_request. ' is required';
 					}
 				}
 			}

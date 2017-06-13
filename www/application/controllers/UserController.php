@@ -16,7 +16,7 @@ class UserController extends Controller
 		//create instance, but get link, because I use singleton
 		$fc = FrontController::getInstance();
 
-		$output = $this->render(USER_FILE);
+		$output = $this->render(PAGE_USER);
 
 		$fc->setBody($output);
 

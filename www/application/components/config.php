@@ -13,9 +13,9 @@ set_include_path(get_include_path()
 
 // Files name: views
 const USER_DEFAULT_FILE = 'user_default.php';
+const PAGE_404 = '404.php';
 
-const USER_FILE = 'user.php';
-const USER_REGISTER_FILE = 'user_register.php';
+const PAGE_USER = 'user.php';
 
 // database for users
 define('SALT', '$2a$07$pigoSeILt9aVj3pItT7oGXrRFhiLr7tJUVn30VjXohw=$');
