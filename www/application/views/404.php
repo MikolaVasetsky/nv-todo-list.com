@@ -1,4 +1,4 @@
-<?php require_once('layouts/start-section.php'); ?>
+<?php require_once('layouts/header.php'); ?>
 
 <style>
 	body {
@@ -31,4 +31,4 @@
 	</div>
 </div>
 
-<?php require_once('layouts/end-section.php'); ?>
+<?php require_once('layouts/footer.php'); ?>
